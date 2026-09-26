@@ -1,0 +1,27 @@
+import discord
+import random
+from discord.ext import commands
+permisos = discord.Intents.default()
+chistes = [
+    "¿por que los pajaros no usan facebook?, porque ya tienen twitter",
+    "¿cual es el animal mas antiguo?... el perro, porque es un buen perro",
+    "¿Qué le dice un espagueti a otro?¡El cuerpo me pide salsa!",
+    "¿Cómo se despiden los químicos?¡Ácido un placer!"
+]
+x = random.choice(chistes)
+permisos.message_content = True
+bot_discord = commands.Bot(command_prefix='*', intents=permisos)
+@bot_discord.event
+async def on_ready():
+    print('bot  en linea ve a discord')
+@bot_discord.command()
+async def hola(ctx):
+    await ctx.send(f'hola {ctx.author.name}, soy un bot de prueba a partir de ahora te ayudaré')
+@bot_discord.command()
+async def ayuda(ctx):
+    await ctx.send("Los comandos que existen son: *hola, *ayuda")
+@bot_discord.command()
+async def chistes(ctx):
+    await ctx.send(x)
+
+bot_discord.run('')
